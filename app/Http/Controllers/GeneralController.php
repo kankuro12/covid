@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Memo;
 use App\Models\UserInfo;
 use App\Models\DonationRequest;
+use App\Models\News;
 
 class GeneralController extends Controller
 {
@@ -43,5 +44,18 @@ class GeneralController extends Controller
             }
         }
         return response()->json($donar->get());
+    }
+
+    public function news(Request $request){
+        $news=News::where('id'>0);
+        if($request->has('sort') ){
+            if($request->has('sort_type')){
+                $news=$news->orderBy($request->sort,$request->sort_type);
+            }else{
+                $news=$news->orderBy($request->sort,'desc');
+            }
+        }
+        return response()->json($news->get());
+
     }
 }

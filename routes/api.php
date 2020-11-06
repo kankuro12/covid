@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Route;
     
     Route::post('donars','GeneralController@GetDonar');
     Route::post('covidwinner','GeneralController@GetWinner');
+    Route::post('news','GeneralController@news');
     
 // });
 
