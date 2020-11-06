@@ -52,7 +52,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'boolean'
+         
         ]);
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials))
@@ -62,8 +62,8 @@ class AuthController extends Controller
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+        $token->expires_at = Carbon::now()->addYear(1);
+        // if ($request->remember_me)
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
@@ -151,5 +151,9 @@ class AuthController extends Controller
             }else{
                 return response()->json(['err'=>'old Password Wrong'],500);
             }
+    }
+
+    public function social(){
+        
     }
 }
