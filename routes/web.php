@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::match(['get', 'post'], 'login', 'AuthController@frontLogin')->name('login');
+
+Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
+    Route::get('dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+    
+});
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.dashboard');
 });

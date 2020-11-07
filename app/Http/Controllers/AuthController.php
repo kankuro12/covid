@@ -156,4 +156,30 @@ class AuthController extends Controller
     public function social(){
         
     }
+
+    public function frontLogin(Request $request){
+        if($request->getMethod()=="POST"){
+
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+             
+            ]);
+            $email=$request->email;
+            $password=$request->password;
+            if (Auth::attempt(['email' => $email, 'password' => $password], true)) {
+                
+                if(Auth::user()->role==0){
+                    return redirect()->route('user.dashboard');
+                }else{
+                    return redirect()->route('admin.dashboard');
+    
+                }
+            }else{
+                return redirect()->back()->withErrors('Credential do not match');
+            }
+        }else{
+            return view('auth.login');
+        }
+    }
 }

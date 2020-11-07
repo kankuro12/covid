@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
         
         });
     });
-    Route::group([ 'auth:api' => '','prefix'=>'user'],function (){
+    Route::group([ 'middleware' => 'auth:api','prefix'=>'user'],function (){
         Route::match(['get', 'post'], 'memo', 'UserController@memo'); 
         Route::get('bloodreq','UserController@bloodRequest');
         Route::post('addbloodreq','UserController@addBloodRequest');
