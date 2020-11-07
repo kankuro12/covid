@@ -16,33 +16,71 @@ class GeneralController extends Controller
 {
     public function GetDonar(Request $request){
         $date=Carbon::now()->addDays(-35);
-        $donar=UserInfo::where('waspositive',1)->whereNotNull('nvdate')->where('nvdate','>',$date);
+        $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
+        where('user_infos.waspositive',1)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date);
         if($request->has('bloodgroup')){
-            $donar=$donar->where('bloodgroup',$request->bloodgroup);
+            $donar=$donar->where('user_infos.bloodgroup',$request->bloodgroup);
         }
+
+        if($request->has('address')){
+            $donar=$donar->where('user_infos.address','like','%'.$request->address.'%');
+        }
+        if($request->has('phone')){
+            $donar=$donar->where('user_infos.phone',$request->address);
+        }
+
+        if($request->has('name')){
+            $donar=$donar->where('users.name','like','%'.$request->name.'%');
+        }
+
+        if($request->has('email')){
+            $donar=$donar->where('users.email','like','%'.$request->email.'%');
+        }
+
         if($request->has('sort') ){
             if($request->has('sort_type')){
-                $donar=$donar->orderBy($request->sort,$request->sort_type);
+                $donar=$donar->orderBy('user_infos.'.$request->sort,$request->sort_type);
             }else{
-                $donar=$donar->orderBy($request->sort,'desc');
+                $donar=$donar->orderBy('user_infos.'.$request->sort,'desc');
             }
+        }else{
+            $donar=$donar->orderBy('user_infos.nvdate','desc');
         }
+        $donar=$donar->select('user_infos.*','users->email','users.name','users.ispublic');
         return response()->json($donar->get());
     }
 
     public function getWinner(Request $request){
      
-        $donar=UserInfo::where('waspositive',1)->whereNotNull('nvdate');
+        $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
+        where('user_infos.waspositive',1)->whereNotNull('user_infos.nvdate');
         if($request->has('bloodgroup')){
-            $donar=$donar->where('bloodgroup',$request->bloodgroup);
+            $donar=$donar->where('user_infos.bloodgroup',$request->bloodgroup);
+        }
+
+        if($request->has('address')){
+            $donar=$donar->where('user_infos.address','like','%'.$request->address.'%');
+        }
+        if($request->has('phone')){
+            $donar=$donar->where('user_infos.phone',$request->address);
+        }
+        if($request->has('name')){
+            $donar=$donar->where('users.name','like','%'.$request->name.'%');
+        }
+
+        if($request->has('email')){
+            $donar=$donar->where('users.email','like','%'.$request->email.'%');
         }
         if($request->has('sort') ){
             if($request->has('sort_type')){
-                $donar=$donar->orderBy($request->sort,$request->sort_type);
+                $donar=$donar->orderBy('user_infos.'.$request->sort,$request->sort_type);
             }else{
-                $donar=$donar->orderBy($request->sort,'desc');
+                $donar=$donar->orderBy('user_infos.'.$request->sort,'desc');
             }
+        }else{
+            $donar=$donar->orderBy('user_infos.nvdate','desc');
         }
+        $donar=$donar->select('user_infos.*','users->email','users.name','users.ispublic');
         return response()->json($donar->get());
     }
 
@@ -57,5 +95,22 @@ class GeneralController extends Controller
         }
         return response()->json($news->get());
 
+    }
+
+    public function bloodRequest(Request $request){
+        $req=DonationRequest::where('donation_requests.accecpted',0);
+        if($request->has('bloodgroup')){
+            $req=$req->where('bloodgroup',$request->bloodgroup);
+        }
+        if($request->has('sort') ){
+            if($request->has('sort_type')){
+                $req=$req->orderBy(''.$request->sort,$request->sort_type);
+            }else{
+                $req=$req->orderBy(''.$request->sort,'desc');
+            }
+        }else{
+            $req=$req->orderBy('created_at','desc');
+        }
+        return response()->json($req->get());
     }
 }

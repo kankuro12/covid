@@ -27,10 +27,14 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], 'memo', 'UserController@memo'); 
         Route::get('bloodreq','UserController@bloodRequest');
         Route::post('addbloodreq','UserController@addBloodRequest');
-        Route::match(['get', 'post'], 'req/{id}', 'UserController@getBloodRequest');
+        Route::get('req/{id}', 'UserController@getBloodRequest');
+
+        
+
     });
 
-    
+    Route::get('bloodreq','GeneralController@bloodRequest');
+
     Route::post('donars','GeneralController@GetDonar');
     Route::post('covidwinner','GeneralController@GetWinner');
     Route::post('news','GeneralController@news');

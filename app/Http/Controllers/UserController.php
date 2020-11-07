@@ -109,7 +109,7 @@ class UserController extends Controller
         $req->save();        
     }
 
-    public function getBloodRequest(){
-
+    public function getBloodRequest($id){
+        return response()->json(DonationRequest::find($id));
     }
 }
