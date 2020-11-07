@@ -48,7 +48,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="#"><img src="{{asset('assets/images/profile_av.jpg')}}" alt="User"></a>
+                    <a class="image" href="#"><img src="https://cdn4.iconfinder.com/data/icons/basic-interface-overcolor/512/user-512.png" alt="User"></a>
                     <div class="detail">
 
                         <h4>{{Auth::user()->name}}</h4>
