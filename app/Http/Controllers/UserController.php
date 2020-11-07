@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Memo;
 use App\Models\UserInfo;
 use App\Models\DonationRequest;
+use App\Models\RequestResponse;
 
 use App\Notifications\PasswordReset;
 use Socialite;
@@ -48,7 +49,7 @@ class UserController extends Controller
             $info->description=$request->description??'';
             $info->age=$request->age;
             $info->phone=$request->phone;
-            $user->phone=$request->phone;
+            $user->hasdonated=$request->hasdonated??0;
             $user->ispublic=$request->ispublic??1;
             $user->save();
             $info->save();
@@ -65,6 +66,7 @@ class UserController extends Controller
                 $data['age']='';
                 $data['description']='';
                 $data['phone']='';
+                $data['hasdonated']=0;
                 $data['ispublic']=$user->ispublic;
             }else{
                 $data['address']=$info->address;
@@ -74,6 +76,7 @@ class UserController extends Controller
                 $data['ispublic']=$user->ispublic;
                 $data['age']=$info->age;
                 $data['description']=$info->description;
+                $data['hasdonated']=$info->hasdonated;
                 $data['phone']=$info->phone;
             }
             return response()->json($data);
@@ -91,6 +94,7 @@ class UserController extends Controller
             'amount'=>'required',
             'hospital'=>'required',
             'needed'=>'required',
+            'bloodgroup'=>'required'
         ]);
         $user=Auth::user();
 
@@ -106,10 +110,31 @@ class UserController extends Controller
         $req->hospital=$request->hospital;
         $req->needed=$request->needed;
         $req->description=$request->description;
+        $req->bloodgroup=$request->bloodgroup;
         $req->save();        
+
+        return response()->json($req);
     }
 
     public function getBloodRequest($id){
         return response()->json(DonationRequest::find($id));
+    }
+
+    public function reqComplete(Request $request){
+        $request->validate([
+            'req_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        $com=new RequestResponse();
+        $com->donation_request_id=$request->req_id;
+        $com->user_id=$request->user_id;
+        $com->save();
+        $user=User::find($request->user_id);
+        $user->hasdonated=1;
+        $user->save();
+        $req=DonationRequest::find($request->req_id);
+        $req->accecpted=1;
+        $req->save();
+        return response()->json(['msg'=>"Plasma Request Completed"]);
     }
 }

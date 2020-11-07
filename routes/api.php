@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
         Route::group([
           'middleware' => 'auth:api'
         ], function() {
+
+
             Route::get('changepassword','AuthController@changePassword');
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AuthController@user');
@@ -28,8 +30,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('bloodreq','UserController@bloodRequest');
         Route::post('addbloodreq','UserController@addBloodRequest');
         Route::get('req/{id}', 'UserController@getBloodRequest');
-
-        
+        Route::post('/reqcomplete','UserController@reqComplete');
 
     });
 
@@ -37,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::post('donars','GeneralController@GetDonar');
     Route::post('covidwinner','GeneralController@GetWinner');
+    Route::get('donations','GeneralController@donations');
     Route::post('news','GeneralController@news');
     
 // });

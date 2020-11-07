@@ -17,7 +17,7 @@ class GeneralController extends Controller
     public function GetDonar(Request $request){
         $date=Carbon::now()->addDays(-35);
         $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
-        where('user_infos.waspositive',1)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date);
+        where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date);
         if($request->has('bloodgroup')){
             $donar=$donar->where('user_infos.bloodgroup',$request->bloodgroup);
         }
@@ -112,5 +112,12 @@ class GeneralController extends Controller
             $req=$req->orderBy('created_at','desc');
         }
         return response()->json($req->get());
+    }
+
+    public function donations(Request $request){
+        $donations =RequestResponse::join('users','user.id','=','request_responses.user_id')
+        ->join('donation_requests','donation_requests.id','request_responses.donation_request_id')
+        ->select( DB::raw('donation_requests.name as rname','users.name as dname','request_responses.created_at'))->orderBy('created_at','desc')->get();
+        return response()->json($donations);
     }
 }

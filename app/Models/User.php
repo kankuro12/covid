@@ -44,4 +44,12 @@ class User extends Authenticatable
     public function bloodRequests(){
         $this->hasMany(DonationRequest::class);
     }
+
+    public function getRole(){
+        if($this->role==0){
+            return 'user';
+        }else{
+            return "admin";
+        }
+    }
 }
