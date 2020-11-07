@@ -48,6 +48,7 @@ class UserController extends Controller
             $info->description=$request->description??'';
             $info->age=$request->age;
             $info->phone=$request->phone;
+            $user->phone=$request->phone;
             $user->ispublic=$request->ispublic??1;
             $user->save();
             $info->save();
@@ -71,9 +72,9 @@ class UserController extends Controller
                 $data['nvdate']=$info->nvdate;
                 $data['waspositive']=$info->waspositive;
                 $data['ispublic']=$user->ispublic;
-                $data['age']=$user->age;
-                $data['description']=$user->description;
-                $data['phone']=$user->phone;
+                $data['age']=$info->age;
+                $data['description']=$info->description;
+                $data['phone']=$info->phone;
             }
             return response()->json($data);
         }

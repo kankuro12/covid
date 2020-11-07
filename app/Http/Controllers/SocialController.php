@@ -22,6 +22,7 @@ class SocialController extends Controller
         }
 
         $email=$socialuser->getEmail();
+        $new=false;
         $user=User::where('email',$email)->first();
         if($user==null){
             $user=new user();
@@ -30,6 +31,7 @@ class SocialController extends Controller
             $user->name=$socialuser->getName();
             $user->password=bcrypt('social123');
             $user->save();
+            $new=true;
         }
 
         $tokenResult = $user->createToken('Personal Access Token');
@@ -38,11 +40,13 @@ class SocialController extends Controller
         // if ($request->remember_me)
         $token->save();
         return response()->json([
+            'new'=>$new,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
-            )->toDateTimeString()
+            )->toDateTimeString(),
+           
         ]);
 
 
