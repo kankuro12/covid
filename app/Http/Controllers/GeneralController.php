@@ -98,7 +98,7 @@ class GeneralController extends Controller
     }
 
     public function bloodRequest(Request $request){
-        $req=DonationRequest::where('donation_requests.accecpted',0);
+        $req=DonationRequest::where('accecpted',0);
         if($request->has('bloodgroup')){
             $req=$req->where('bloodgroup',$request->bloodgroup);
         }
