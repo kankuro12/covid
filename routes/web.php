@@ -16,6 +16,10 @@ Route::match(['get', 'post'], 'login', 'AuthController@frontLogin')->name('login
 
 Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+    Route::match(['get', 'post'],'news/add', 'Admin\NewsController@addNews')->name('admin.news-add');
+    Route::match(['get', 'post'],'news/edit/{news}', 'Admin\NewsController@edit')->name('admin.news-edit');
+    Route::get('news', 'Admin\NewsController@index')->name('admin.news');
+    Route::get('news\del\{news}', 'Admin\NewsController@del')->name('admin.news-del');
     
 });
 

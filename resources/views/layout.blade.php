@@ -11,6 +11,7 @@
 <!-- Favicon-->
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+@yield('css')
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
 </head>
@@ -57,7 +58,13 @@
                 </div>
             </li>
             <li><a href="/"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>News</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{route('admin.news-add')}}">Add New</a></li>
+                    <li><a href="{{route('admin.news')}}">List</a></li>
+                
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>
@@ -89,6 +96,22 @@
                             <h2>@yield('header')</h2>
                         </div>
                         <div class="body">
+                            <div class="pt-2 pb-2">
+                                @yield('toolbar')
+                            </div>
+                            <div class="pt-2 pb-2">
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
+
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
+                            </div>
                             @yield('content')
                         </div>
                     </div>
@@ -101,7 +124,9 @@
 <script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js --> 
 <script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js --> 
 
+@yield('js')
 <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+
 </body>
 
 </html>
