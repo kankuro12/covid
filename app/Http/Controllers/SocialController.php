@@ -34,6 +34,9 @@ class SocialController extends Controller
             $new=true;
         }
 
+        if(UserInfo::where('user_id',$user->id)->count()==0){
+            $new=true;
+        }
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->expires_at = Carbon::now()->addYear(1);
