@@ -45,6 +45,10 @@ class User extends Authenticatable
         $this->hasMany(DonationRequest::class);
     }
 
+    public function info(){
+        return $this->hasOne(UserInfo::class);
+    }
+
     public function getRole(){
         if($this->role==0){
             return 'user';

@@ -32,9 +32,21 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        $token->expires_at = Carbon::now()->addYear(1);
+        // if ($request->remember_me)
+        $token->save();
         return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString()
+        ]);
+        // return response()->json([
+        //     'message' => 'Successfully created user!'
+        // ], 201);
     }
   
     /**
