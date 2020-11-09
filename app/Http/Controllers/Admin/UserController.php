@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function donors(){
         $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
-        where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date)->where('users.verified',1);
+        where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date)->where('users.verified',1)->where('users.ispublic',1);
         if($request->has('bloodgroup')){
             $donar=$donar->where('user_infos.bloodgroup',$request->bloodgroup);
         }
@@ -51,7 +51,18 @@ class UserController extends Controller
         }else{
             $donar=$donar->orderBy('user_infos.nvdate','desc');
         }
-        $donar=$donar->select('user_infos.*','users->email','users.name','users.ispublic');
+        $donar=$donar->select('user_infos.*','users->email','users.name');
         return response()->json($donar->get());
+    }
+
+    public function verify(Request $request){
+        $request->validate([
+            'status'=>'required',
+            'uid'=>'required'
+        ]);
+        $user=User::find($request->uid);
+        $user->verified=$request->status==0?1:0;
+        $user->save();
+        return response()->json(['status'=>$user->verified,'id'=>$user->id]);
     }
 }

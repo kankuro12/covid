@@ -6,6 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>@yield('title')</title>
 <!-- Favicon-->
@@ -14,6 +15,7 @@
 @yield('css')
 <!-- Custom Css -->
 <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    @include('css')
 </head>
 
 <body class="theme-blush">
@@ -62,6 +64,13 @@
                 <ul class="ml-menu">
                     <li><a href="{{route('admin.news-add')}}">Add New</a></li>
                     <li><a href="{{route('admin.news')}}">List</a></li>
+                
+                </ul>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-circle"></i><span>Users</span></a>
+                <ul class="ml-menu">
+                    {{-- <li><a href="{{route('admin.news-add')}}">Add New</a></li> --}}
+                    <li><a href="{{route('admin.users')}}">List</a></li>
                 
                 </ul>
             </li>
@@ -123,7 +132,13 @@
 <!-- Jquery Core Js --> 
 <script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js --> 
 <script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js --> 
-
+<script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
 @yield('js')
 <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
 

@@ -16,6 +16,9 @@
             <thead>
                 <tr>
                     <th>
+                        #ID
+                    </th>
+                    <th>
                         Name
                     </th>
                     <th>
@@ -24,12 +27,23 @@
                     <th>
                         phone
                     </th>
-                    <th></th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                        -VE Date
+                    </th>
+                    <th>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list as $user)
                     <tr>
+                        <td>
+                            {{$user->id}}
+                        </td>
                         <td>
                             {{$user->name}}
                         </td>
@@ -39,8 +53,33 @@
                         <td>
                             {{$user->phone}}
                         </td>
+                        @php
+                            
+                            $info=$user->info;
+                            $null=$info==null;
+                        @endphp
                         <td>
-                            {{$user->created_at->diffForHumans()}}
+                            {{$null?'--':$info->bloodgroup}}
+                        </td>
+                        <td>
+                            @if ($null)
+                                --
+                            @else
+                                @if ($info->waspositive)
+                                    {{$info->nvdate??'Not _ve yet'}}
+                                @else
+                                    Nono covid
+                                @endif
+                            @endif
+                        </td>
+                        {{-- <td>
+
+                        </td> --}}
+                        <td>
+                            
+                            <div class="" >
+                                    <button id="verify-{{$user->id}}" class="btn btn-success verify {{$user->verified==0?'unverified':'verified'}}" data-uid="{{$user->id}}" data-status="{{$user->verified}}"></button>
+                            </div>
                         </td>
                         {{-- <td>
                             <a href="{{route('admin.user-edit',['user'=>$user->id])}}">Edit</a> |
@@ -59,8 +98,36 @@
 <script src="{{asset('assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
 <script>
+
+   
     $(function () {
         $('#newstable').DataTable();
+        $('.verify').click(function(){
+            console.log(this);
+            vdata=$(this).data();
+            console.log(vdata);
+            $.ajax({
+                url:"{{route('admin.user-verify')}}",
+                data:vdata,
+                type: "post",
+                dataType  : 'json',
+                success   : function(data) {
+                    console.log(data.status);
+                    $('#verify-'+data.id).data('status',data.status);
+                    if(data.status==1){
+                        $('#verify-'+data.id).addClass('verified').removeClass('unverified');
+                    }else{
+                        $('#verify-'+data.id).addClass('unverified').removeClass('verified');
+
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+
+
     });
 </script>
 @endsection
