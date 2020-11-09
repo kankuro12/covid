@@ -19,4 +19,39 @@ class UserController extends Controller
         $list=User::where('role',0)->get();
         return  view('admin.user.index',compact('list'));
     }
+
+    public function donors(){
+        $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
+        where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date)->where('users.verified',1);
+        if($request->has('bloodgroup')){
+            $donar=$donar->where('user_infos.bloodgroup',$request->bloodgroup);
+        }
+
+        if($request->has('address')){
+            $donar=$donar->where('user_infos.address','like','%'.$request->address.'%');
+        }
+        if($request->has('phone')){
+            $donar=$donar->where('user_infos.phone',$request->address);
+        }
+
+        if($request->has('name')){
+            $donar=$donar->where('users.name','like','%'.$request->name.'%');
+        }
+
+        if($request->has('email')){
+            $donar=$donar->where('users.email','like','%'.$request->email.'%');
+        }
+
+        if($request->has('sort') ){
+            if($request->has('sort_type')){
+                $donar=$donar->orderBy('user_infos.'.$request->sort,$request->sort_type);
+            }else{
+                $donar=$donar->orderBy('user_infos.'.$request->sort,'desc');
+            }
+        }else{
+            $donar=$donar->orderBy('user_infos.nvdate','desc');
+        }
+        $donar=$donar->select('user_infos.*','users->email','users.name','users.ispublic');
+        return response()->json($donar->get());
+    }
 }

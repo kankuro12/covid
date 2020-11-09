@@ -23,7 +23,8 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::get('news\del\{news}', 'Admin\NewsController@del')->name('admin.news-del');
 
     //user section
-    Route::get('users', 'Admin\userController@index')->name('admin.users');
+    Route::get('users', 'Admin\UserController@index')->name('admin.users');
+    Route::get('donors','Admin\UserController@donors')->name('admin.donors');
     Route::match(['get', 'post'],'users/add', 'Admin\User@addUser')->name('admin.user-add');
     Route::match(['get', 'post'],'users/edit/{user}', 'Admin\UserController@edit')->name('admin.user-edit');
   
