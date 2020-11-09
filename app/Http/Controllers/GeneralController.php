@@ -85,7 +85,7 @@ class GeneralController extends Controller
     }
 
     public function news(Request $request){
-        $news=News::where('id'>0);
+        $news=News::where('id','>',0);
         if($request->has('sort') ){
             if($request->has('sort_type')){
                 $news=$news->orderBy($request->sort,$request->sort_type);
