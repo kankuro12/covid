@@ -70,6 +70,42 @@ class UserController extends Controller
         return view('admin.user.show',compact('user'));
     }
 
+    public function edit(Request $request,User $user){
+        if($request->getMethod()=="POST"){
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|string|email|unique:users',
+            ]);
+           
+            $info=$user->info;
+            if($info==null){
+                $info=new UserInfo();
+                $info->user_id=$user->id;
+            }
+            $info->address=$request->address;
+            $info->bloodgroup=$request->bloodgroup;
+            $info->nvdate=$request->nvdate;
+            $info->pdate=$request->pdate;
+            $info->testcenter=$request->testcenter;
+            $info->waspositive=1;
+            $info->description=$request->description??'';
+            $info->age=$request->age;
+            $info->phone=$request->phone;
+            $info->hasdonated=$request->hasdonated??0;
+            $info->save();
+
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->ispublic=$request->ispublic??1;
+            $user->verified=1;
+            $user->save();
+
+            return redirect()->route('admin.user-edit',['user'=>$user->id])->with('message','Donor Updated Sucessfully');
+
+        }else{
+            return view('admin.user.edit',compact('user'));
+        }
+    }
     public function add(Request $request){
         if($request->getMethod()=="POST"){
             $request->validate([
