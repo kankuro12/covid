@@ -11,7 +11,7 @@ use App\Models\Memo;
 use App\Models\UserInfo;
 use App\Models\DonationRequest;
 use App\Models\News;
-
+use App\Models\RequestResponse;
 class GeneralController extends Controller
 {
     public function GetDonar(Request $request){
