@@ -11,6 +11,7 @@ use App\Models\Memo;
 use App\Models\UserInfo;
 use App\Models\DonationRequest;
 use App\Models\RequestResponse;
+use App\Models\ContactList;
 
 use App\Notifications\PasswordReset;
 use Socialite;
@@ -45,12 +46,17 @@ class UserController extends Controller
             $info->address=$request->address;
             $info->bloodgroup=$request->bloodgroup;
             $info->nvdate=$request->nvdate;
+            $info->nvdate=$request->nvdate;
+            $info->testcenter=$request->testcenter;
             $info->waspositive=$request->waspositive;
             $info->description=$request->description??'';
             $info->age=$request->age;
             $info->phone=$request->phone;
             $user->hasdonated=$request->hasdonated??0;
             $user->ispublic=$request->ispublic??1;
+            if($request->has('name')){
+                $user->name=$request->name;
+            }
             $user->save();
             $info->save();
             return response()->json(['msg'=>'Info Saved  Sucessfully']);
@@ -66,17 +72,25 @@ class UserController extends Controller
                 $data['age']='';
                 $data['description']='';
                 $data['phone']='';
+                $data['testcenter']='';
+                $data['pdate']='';
                 $data['hasdonated']=0;
                 $data['ispublic']=$user->ispublic;
+                $data['name']=$user->name;
+                $data['email']=$user->email;
             }else{
                 $data['address']=$info->address;
                 $data['bloodgroup']=$info->bloodgroup;
                 $data['nvdate']=$info->nvdate;
                 $data['waspositive']=$info->waspositive;
                 $data['ispublic']=$user->ispublic;
+                $data['name']=$user->name;
+                $data['email']=$user->email;
                 $data['age']=$info->age;
                 $data['description']=$info->description;
                 $data['hasdonated']=$info->hasdonated;
+                $data['pdate']=$info->pdate;
+                $data['testcenter']=$info->testcenter;
                 $data['phone']=$info->phone;
             }
             return response()->json($data);
@@ -136,5 +150,18 @@ class UserController extends Controller
         $req->accecpted=1;
         $req->save();
         return response()->json(['msg'=>"Plasma Request Completed"]);
+    }
+
+    public function addcontanct(Request $request){
+        $request->validate([
+            'req_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        $com=new ContactList();
+        $com->donation_request_id=$request->req_id;
+        $com->user_id=$request->user_id;
+        $com->save();
+      
+        return response()->json(['msg'=>"Contact Added Completed"]);
     }
 }

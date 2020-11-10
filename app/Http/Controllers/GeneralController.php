@@ -94,7 +94,6 @@ class GeneralController extends Controller
             }
         }
         return response()->json($news->get());
-
     }
 
     public function bloodRequest(Request $request){

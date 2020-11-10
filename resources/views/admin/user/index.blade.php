@@ -31,7 +31,7 @@
                         Blood Group
                     </th>
                     <th>
-                        -VE Date
+                        INFO
                     </th>
                     <th>
 
@@ -66,9 +66,17 @@
                                 --
                             @else
                                 @if ($info->waspositive)
-                                    {{$info->nvdate??'Not _ve yet'}}
+                                    <div>
+                                        <strong>Test Center : </strong>{{$info->testcenter}}
+                                    </div>
+                                    <div>
+                                        <strong>+ve Date : </strong>{{$info->pdate}}
+                                    </div>
+                                    <div>
+                                        <strong>-ve Date : </strong> {{$info->nvdate??'Not -ve yet'}}
+                                    </div>
                                 @else
-                                    Nono covid
+                                    Not covid Patient
                                 @endif
                             @endif
                         </td>
