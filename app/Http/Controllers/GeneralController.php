@@ -117,7 +117,7 @@ class GeneralController extends Controller
         $donations =RequestResponse::join('users','users.id','=','request_responses.user_id')
         ->join('donation_requests','donation_requests.id','=','request_responses.donation_request_id')
         ->join('user_infos','users.id','=','user_infos.user_id')
-        ->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('created_at','desc')->get();
+        ->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('donation_requests.created_at','desc')->get();
         return response()->json($donations);
     }
 }
