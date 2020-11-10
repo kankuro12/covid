@@ -152,7 +152,7 @@ class UserController extends Controller
         return response()->json(['msg'=>"Plasma Request Completed"]);
     }
 
-    public function addcontanct(Request $request){
+    public function addcontact(Request $request){
         $request->validate([
             'req_id'=>'required',
             'user_id'=>'required'
@@ -163,5 +163,30 @@ class UserController extends Controller
         $com->save();
       
         return response()->json(['msg'=>"Contact Added Completed"]);
+    }
+
+    public function contacts($req_id){
+        $clist=ContactList::where('donation_request_id',$req_id)->get();
+        $datas=[];
+        foreach($clist as $contact){
+            $user=User::find($contact->user_id);
+            $info=$user->info;
+            $data=[];
+            $data['address']=$info->address;
+                $data['bloodgroup']=$info->bloodgroup;
+                $data['nvdate']=$info->nvdate;
+                $data['waspositive']=$info->waspositive;
+                $data['ispublic']=$user->ispublic;
+                $data['name']=$user->name;
+                $data['email']=$user->email;
+                $data['age']=$info->age;
+                $data['description']=$info->description;
+                $data['hasdonated']=$info->hasdonated;
+                $data['pdate']=$info->pdate;
+                $data['testcenter']=$info->testcenter;
+                $data['phone']=$info->phone;
+                array_push($datas,$data);
+        }
+        return response()->json($datas);
     }
 }
