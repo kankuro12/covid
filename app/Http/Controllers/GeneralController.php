@@ -46,7 +46,7 @@ class GeneralController extends Controller
         }else{
             $donar=$donar->orderBy('user_infos.nvdate','desc');
         }
-        $donar=$donar->select('user_infos.*','users->email','users.name','users.ispublic');
+        $donar=$donar->select('user_infos.*','users.email','users.name','users.ispublic');
         return response()->json($donar->get());
     }
 
