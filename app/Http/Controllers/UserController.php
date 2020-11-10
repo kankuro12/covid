@@ -42,6 +42,7 @@ class UserController extends Controller
             $info=UserInfo::where('user_id',$user->id)->first();
             if($info==null){
                 $info=new UserInfo();
+                $info->user_id=$user->id;
             }
             $info->address=$request->address;
             $info->bloodgroup=$request->bloodgroup;

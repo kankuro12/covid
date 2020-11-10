@@ -72,9 +72,37 @@ class UserController extends Controller
 
     public function add(Request $request){
         if($request->getMethod()=="POST"){
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|string|email|unique:users',
+            ]);
+            $user = new User([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt('user@123456')
+            ]);
+            $user->save();
+
+            $info=new UserInfo();
+            $info->user_id=$user->id;
+            $info->address=$request->address;
+            $info->bloodgroup=$request->bloodgroup;
+            $info->nvdate=$request->nvdate;
+            $info->pdate=$request->pdate;
+            $info->testcenter=$request->testcenter;
+            $info->waspositive=1;
+            $info->description=$request->description??'';
+            $info->age=$request->age;
+            $info->phone=$request->phone;
+            $info->hasdonated=$request->hasdonated??0;
+            $user->ispublic=$request->ispublic??1;
+            $user->verified=1;
+            $info->save();
+            $user->save();
+            return redirect()->route('admin.user-add')->with('message','Donor Added Sucessfully');
 
         }else{
-            
+            return view('admin.user.add');
         }
     }
 }

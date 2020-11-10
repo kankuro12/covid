@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
 @endsection
 @section('toolbar')
-    <a class="btn btn-primary" href="{{route('admin.news-add')}}">
+    <a class="btn btn-primary" href="{{route('admin.user-add')}}">
         Add Donor
     </a>
     <hr>
