@@ -26,8 +26,10 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::get('users', 'Admin\UserController@index')->name('admin.users');
     Route::post('users/verify', 'Admin\UserController@verify')->name('admin.user-verify');
     Route::get('donors','Admin\UserController@donors')->name('admin.donors');
-    Route::match(['get', 'post'],'users/add', 'Admin\User@addUser')->name('admin.user-add');
+    Route::get('show/{user}','Admin\UserController@show')->name('admin.user-show');
+    
     Route::match(['get', 'post'],'users/edit/{user}', 'Admin\UserController@edit')->name('admin.user-edit');
+    Route::match(['get', 'post'],'users/add', 'Admin\UserController@add')->name('admin.user-add');
   
     Route::get('user\del\{user}', 'Admin\UserController@del')->name('admin.user-del');
     

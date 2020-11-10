@@ -42,7 +42,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
-            )->toDateTimeString()
+            )->toDateTimeString(),
+            'newuser'=>true
         ]);
         // return response()->json([
         //     'message' => 'Successfully created user!'
@@ -82,7 +83,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
-            )->toDateTimeString()
+            )->toDateTimeString(),
+            'newuser'=>$user->info==null
         ]);
     }
   

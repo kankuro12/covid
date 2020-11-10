@@ -65,4 +65,16 @@ class UserController extends Controller
         $user->save();
         return response()->json(['status'=>$user->verified,'id'=>$user->id]);
     }
+
+    public function show(User $user){
+        return view('admin.user.show',compact('user'));
+    }
+
+    public function add(Request $request){
+        if($request->getMethod()=="POST"){
+
+        }else{
+            
+        }
+    }
 }

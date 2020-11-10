@@ -5,7 +5,7 @@
 @endsection
 @section('toolbar')
     <a class="btn btn-primary" href="{{route('admin.news-add')}}">
-        Add User
+        Add Donor
     </a>
     <hr>
 @endsection
@@ -87,6 +87,9 @@
                             
                             <div class="" >
                                     <button id="verify-{{$user->id}}" class="btn btn-success verify {{$user->verified==0?'unverified':'verified'}}" data-uid="{{$user->id}}" data-status="{{$user->verified}}"></button>
+                            </div>
+                            <div>
+                                <a href="{{route('admin.user-show',['user'=>$user->id])}}">Detail</a>
                             </div>
                         </td>
                         {{-- <td>
