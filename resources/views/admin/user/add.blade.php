@@ -38,8 +38,14 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="name">Phone</label>
+                <label for="[hone]">Phone</label>
                 <input type="text" class="form-control" required placeholder="Phone" name="phone">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" required placeholder="Address" name="address">
             </div>
         </div>
         <div class="col-md-6">
@@ -64,13 +70,13 @@
                 <input type="date" class="form-control"  placeholder="Negative Date" name="nvdate">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="age">Age</label>
                 <input type="number" class="form-control" min="1"  required placeholder="Age" name="age">
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="testcenter">Test Center</label>
                 <input type="text" class="form-control" required placeholder="Test Center" name="testcenter">
