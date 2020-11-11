@@ -89,7 +89,8 @@
                                     <button id="verify-{{$user->id}}" class="btn btn-success verify {{$user->verified==0?'unverified':'verified'}}" data-uid="{{$user->id}}" data-status="{{$user->verified}}"></button>
                             </div>
                             <div>
-                                <a href="{{route('admin.user-show',['user'=>$user->id])}}">Detail</a>
+                                <a href="{{route('admin.user-show',['user'=>$user->id])}}">Detail</a>|
+                                <a href="{{route('admin.user-edit',['user'=>$user->id])}}">Edit</a>
                             </div>
                         </td>
                         {{-- <td>

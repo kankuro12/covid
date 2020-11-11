@@ -20,6 +20,11 @@
                 'O-',
                 'AB-'
             ];
+            
+                            
+    $info=$user->info;
+    $null=$info==null;
+    
 @endphp 
 <form action="{{route('admin.user-add')}}" method="post">
     @csrf
@@ -33,19 +38,19 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" required placeholder="Email" name="email" value="{{$user->email}}">
+                <input type="email" class="form-control" required placeholder="Email" name="email" value="{{$user->email}}" readonly>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="[hone]">Phone</label>
-                <input type="text" class="form-control" required placeholder="Phone" name="phone">
+                <input type="text" class="form-control" required placeholder="Phone" name="phone" value="{{$null?'':$info->phone}}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" required placeholder="Address" name="address">
+                <input type="text" class="form-control" required placeholder="Address" name="address" value="{{$null?'':$info->address}}">
             </div>
         </div>
         <div class="col-md-6">
@@ -53,7 +58,13 @@
                 <label for="name">Blood Group</label>
                 <select  class="form-control" required  name="bloodgroup">
                     @foreach ($bg as $b)
-                        <option value="{{$b}}">{{$b}}</option>
+                        <option value="{{$b}}"
+                            @if (!$null)
+                                @if ($info->bloodgroup==$b)
+                                    selected
+                                @endif
+                            @endif
+                        >{{$b}}</option>
                     @endforeach
                 </select>
             </div>
@@ -61,36 +72,42 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="pdate">Positive Date</label>
-                <input type="date" class="form-control" required placeholder="Positive Date" name="pdate">
+                <input type="date" class="form-control" required placeholder="Positive Date" name="pdate" value="{{$null?'':$info->pdate}}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="nvdate">Negative Date</label>
-                <input type="date" class="form-control"  placeholder="Negative Date" name="nvdate">
+                <input type="date" class="form-control"  placeholder="Negative Date" name="nvdate" value="{{$null?'':$info->ndate}}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" min="1"  required placeholder="Age" name="age">
+                <input type="number" class="form-control" min="1"  required placeholder="Age" name="age" value="{{$null?'':$info->age}}">
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="testcenter">Test Center</label>
-                <input type="text" class="form-control" required placeholder="Test Center" name="testcenter">
+                <input type="text" class="form-control" required placeholder="Test Center" name="testcenter" value="{{$null?'':$info->testcenter}}">
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="description">Medical History</label>
-                <textarea  class="form-control"  placeholder="Medical history" name="description"></textarea>
+                <textarea  class="form-control"  placeholder="Medical history" name="description">{{$null?'':$info->description}}</textarea>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input type="checkbox" name="hasdonated" value="1" style="margin-right:10px"> Has Already Donated
+                <input type="checkbox" name="hasdonated" value="1" style="margin-right:10px"
+                @if (!$null)
+                    @if ($info->hasdonated==1)
+                        checked
+                    @endif
+                @endif
+                > Has Already Donated
             </div>
         </div>
         <div class="col-md-12">
