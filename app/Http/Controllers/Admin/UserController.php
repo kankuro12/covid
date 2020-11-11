@@ -141,4 +141,32 @@ class UserController extends Controller
             return view('admin.user.add');
         }
     }
+
+    public function updateReq(Request $request,DonationRequest $req){
+        $request->validate([
+            'name'=>'required',
+            'phone'=>'required',
+            'amount'=>'required',
+            'hospital'=>'required',
+            'needed'=>'required',
+            'bloodgroup'=>'required'
+        ]);
+       
+        $req->name=$request->name;
+        $req->phone=$request->phone;
+        $req->amount=$request->amount;
+        $req->hospital=$request->hospital;
+        $req->needed=$request->needed;
+        $req->description=$request->description;
+        $req->bloodgroup=$request->bloodgroup;
+        $req->save();  
+
+        return redirect()->route('admin.user-show',['user'=>$req->user_id])->with('message','Request Updated Sucessfully');;
+    }
+
+    public function search($phone,$req_id){
+        $users=UserInfo::where('phone','like','%'.$phone.'%')->get();
+        return view('admin.user.search_phone',compact('users','req_id'));
+        
+    }
 }

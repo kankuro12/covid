@@ -26,7 +26,7 @@ class GeneralController extends Controller
             $donar=$donar->where('user_infos.address','like','%'.$request->address.'%');
         }
         if($request->has('phone')){
-            $donar=$donar->where('user_infos.phone',$request->address);
+            $donar=$donar->where('user_infos.phone','like','%'.$request->address.'%');
         }
 
         if($request->has('name')){

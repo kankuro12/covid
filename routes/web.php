@@ -24,6 +24,7 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
 
     //user section
     Route::get('users', 'Admin\UserController@index')->name('admin.users');
+    Route::get('users/search/{phone}/{req_id}', 'Admin\UserController@search')->name('admin.user-search-phone');
     Route::post('users/verify', 'Admin\UserController@verify')->name('admin.user-verify');
     Route::get('donors','Admin\UserController@donors')->name('admin.donors');
     Route::get('show/{user}','Admin\UserController@show')->name('admin.user-show');
@@ -31,8 +32,17 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::match(['get', 'post'],'users/edit/{user}', 'Admin\UserController@edit')->name('admin.user-edit');
     Route::match(['get', 'post'],'users/add', 'Admin\UserController@add')->name('admin.user-add');
   
+    Route::post('req/{req}','Admin\UserController@updateReq')->name('admin.update-req');
     Route::get('user\del\{user}', 'Admin\UserController@del')->name('admin.user-del');
     
+    //Request Section
+    Route::get('requests', 'Admin\RequestController@index')->name('admin.requests');
+    Route::match(['get','post'],'requests/add', 'Admin\RequestController@add')->name('admin.request-add');
+    Route::get('requests/edit/{req}', 'Admin\RequestController@edit')->name('admin.request-edit');
+    Route::get('requests/del/{req}', 'Admin\RequestController@del')->name('admin.request-del');
+    Route::get('requests/show/{req}', 'Admin\RequestController@show')->name('admin.request-show');
+    Route::get('requests/complete/{req}/{user}', 'Admin\RequestController@complete')->name('admin.request-complete');
+   
 });
 
 Route::get('/', function () {

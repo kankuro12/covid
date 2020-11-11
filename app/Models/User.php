@@ -49,6 +49,9 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class);
     }
 
+    public function requests(){
+        return $this->hasMany(DonationRequest::class);
+    }
     public function getRole(){
         if($this->role==0){
             return 'user';

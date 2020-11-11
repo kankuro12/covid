@@ -49,6 +49,16 @@
             </div>
         @endif
     </div>
+    <div>
+        @foreach ($user->requests as $req)
+        
+            <div>
+                <div class="col-md-6">
+                    <strong>Name : </strong>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection
 @section('js')
 

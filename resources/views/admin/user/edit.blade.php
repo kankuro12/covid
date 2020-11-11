@@ -112,7 +112,7 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <input type="submit" value="Add Donor" class="btn btn-primary" >
+                <input type="submit" value="Update Donor" class="btn btn-primary" >
                 <a href="{{route('admin.users')}}" class="btn btn-danger">Cancel</a>
             </div>
         </div>
