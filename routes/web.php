@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::match(['get', 'post'], 'login', 'AuthController@frontLogin')->name('login');
+Route::match(['get', 'post'], 'logout', 'AuthController@frontLogout')->name('logout');
 
 Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');

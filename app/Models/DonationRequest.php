@@ -12,4 +12,8 @@ class DonationRequest extends Model
     public function contacts(){
         return $this->hasMany(ContactList::class);
     }
+
+    public function response(){
+        return $this->hasOne(RequestResponse::class);
+    }
 }

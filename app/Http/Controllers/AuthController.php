@@ -196,4 +196,9 @@ class AuthController extends Controller
             return view('auth.login');
         }
     }
+
+    public function frontLogout(){
+        Auth::logout();
+        return redirect('/login');
+    }
 }

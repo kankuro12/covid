@@ -45,7 +45,7 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.html"><img src="{{asset('assets/images/logo.svg')}}" width="25" alt="Aero"><span class="m-l-10">Plasma Donation</span></a>
+        <a href="/"><img src="{{asset('assets/images/logo.svg')}}" width="25" alt="Aero"><span class="m-l-10">Plasma Donation</span></a>
     </div>
     <div class="menu">
         <ul class="list">
@@ -71,10 +71,12 @@
                 <ul class="ml-menu">
                     {{-- <li><a href="{{route('admin.news-add')}}">Add New</a></li> --}}
                     <li><a href="{{route('admin.users')}}">List</a></li>
+                    <li><a href="{{route('admin.user-add')}}">Add Donor</a></li>
+
                 
                 </ul>
             </li>
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-circle"></i><span>Requests</span></a>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-bookmark"></i><span>Requests</span></a>
                 <ul class="ml-menu">
                     {{-- <li><a href="{{route('admin.news-add')}}">Add New</a></li> --}}
                     <li><a href="{{route('admin.requests')}}">List</a></li>
@@ -82,6 +84,8 @@
                 
                 </ul>
             </li>
+            <li><a href="{{route('logout')}}"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
+
         </ul>
     </div>
 </aside>

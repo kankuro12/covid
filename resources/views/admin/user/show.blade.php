@@ -40,6 +40,7 @@
                 <strong>Age</strong>{{$info->age}}
             </div>
             <div class="col-md-12">
+                <hr>
                 <div>
                     <strong>Previous Medical History</strong>
                 </div>
@@ -49,14 +50,45 @@
             </div>
         @endif
     </div>
+    <hr>
     <div>
         @foreach ($user->requests as $req)
         
-            <div>
-                <div class="col-md-6">
-                    <strong>Name : </strong>
-                </div>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Name: </strong>{{$req->name}}
             </div>
+            <div class="col-md-6">
+                <strong>Hospital: </strong>{{$req->hospital}}
+            </div>
+                <div class="col-md-3">
+                    <strong>Phone: </strong>{{$req->phone}}
+                </div>
+                <div class="col-md-3">
+                    <strong>Blood Group : </strong>{{$req->bloodgroup}}
+                </div>
+                <div class="col-md-3">
+                    <strong>Needed Date: </strong>{{$req->needed}}
+                </div>
+                <div class="col-md-3">
+                    <strong>Needed Amount: </strong>{{$req->amount}}
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                    <div>
+                        <strong>Extra Detail</strong>
+                    </div>
+                    <div>
+                        {{$req->description}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <a href="{{route('admin.request-show',['req'=>$req->id])}}">Details</a>
+                    </div>
+                </div>
+          
+        </div>
         @endforeach
     </div>
 @endsection

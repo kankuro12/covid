@@ -85,6 +85,23 @@
                 </div>
             </div>
         </div>
+    @else
+        <div>
+            @php
+                $reponse=$req->response;
+            @endphp
+            @if ($response!=null)
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Name : </strong>{{$response->user->name}}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>phone : </strong>{{$response->user->info!=null?$response->user->info->phone:""}}
+                    </div>
+                  
+                </div>
+            @endif
+        </div>
     @endif
 @endsection
 @section('js')
