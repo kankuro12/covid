@@ -109,7 +109,7 @@ class UserController extends Controller
         return response()->json(Auth::user()->bloodRequests);
     }
 
-    public function addBloodRequest(){
+    public function addBloodRequest(Request $request){
         $request->validate([
             'name'=>'required',
             'phone'=>'required',
