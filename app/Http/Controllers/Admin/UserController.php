@@ -74,7 +74,7 @@ class UserController extends Controller
         if($request->getMethod()=="POST"){
             $request->validate([
                 'name' => 'required|string',
-                'email' => 'required|string|email|unique:users',
+                'email' => 'required|string|email',
             ]);
            
             $info=$user->info;
@@ -92,6 +92,8 @@ class UserController extends Controller
             $info->age=$request->age;
             $info->phone=$request->phone;
             $info->hasdonated=$request->hasdonated??0;
+            $info->labid=$request->labid;
+            $info->swabcollecteddate=$request->swabcollecteddate;
             $info->save();
 
             $user->name=$request->name;

@@ -28,6 +28,12 @@
                 <strong>Blood Group : </strong>{{$info->bloodgroup}}
             </div>
             <div class="col-md-6">
+                <strong>Swab Collected Date: </strong>{{$info->swabcollecteddate}}
+            </div>
+            <div class="col-md-6">
+                <strong>Lab Id: </strong>{{$info->labid}}
+            </div>
+            <div class="col-md-6">
                 <strong>Test Center: </strong>{{$info->testcenter}}
             </div>
             <div class="col-md-6">

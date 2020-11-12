@@ -66,6 +66,12 @@
                                 --
                             @else
                                 @if ($info->waspositive)
+                                <div>
+                                    <strong>Lab  Id : </strong>{{$info->labid}}
+                                </div>
+                                <div>
+                                    <strong>Swab Collected Date : </strong>{{$info->swabcollecteddate}}
+                                </div>
                                     <div>
                                         <strong>Test Center : </strong>{{$info->testcenter}}
                                     </div>

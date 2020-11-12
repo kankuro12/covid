@@ -87,6 +87,18 @@
                 <input type="number" class="form-control" min="1"  required placeholder="Age" name="age" value="{{$null?'':$info->age}}">
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="labid">Lab ID</label>
+                <input type="text" class="form-control" required placeholder="Lab Id" name="labid" value="{{$null?'':$info->labid}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="swabcollecteddate">Swab Collected Date</label>
+                <input type="date" class="form-control" required placeholder="Swab Collected Date" name="swabcollecteddate" value="{{$null?'':$info->swabcollecteddate}}">
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="testcenter">Test Center</label>
