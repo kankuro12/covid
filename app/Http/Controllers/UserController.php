@@ -53,6 +53,8 @@ class UserController extends Controller
             $info->description=$request->description??'';
             $info->age=$request->age;
             $info->phone=$request->phone;
+            $info->labid=$request->labid;
+            $info->swabcollecteddate=$request->swabcollecteddate;
             $info->hasdonated=$request->hasdonated??0;
             $user->ispublic=$request->ispublic??1;
             if($request->has('name')){

@@ -17,7 +17,7 @@ class AdminSeed extends Seeder
         $user->email='admin@admin.com';
         $user->name='admin';
         $user->password=bcrypt('admin@123');
-        $role=-1;
+        $user->role=1;
         $user->phone="9800000000";
         $user->save();
     }
