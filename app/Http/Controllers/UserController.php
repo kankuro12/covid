@@ -60,7 +60,7 @@ class UserController extends Controller
             }
             $user->save();
             $info->save();
-            return response()->json(['msg'=>'Info Saved  Sucessfully']);
+            return response()->json(['msg'=>'Info Saved  Sucessfully','info'=>$info,'user'=>$user]);
 
         }else{
             $info=UserInfo::where('user_id',$user->id)->first();
