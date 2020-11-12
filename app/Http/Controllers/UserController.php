@@ -77,6 +77,9 @@ class UserController extends Controller
                 $data['phone']='';
                 $data['testcenter']='';
                 $data['pdate']='';
+                $data['labid']='';
+                $data['swabcollecteddate']='';
+                $data['pdate']='';
                 $data['hasdonated']=0;
                 $data['ispublic']=$user->ispublic;
                 $data['name']=$user->name;
@@ -95,6 +98,8 @@ class UserController extends Controller
                 $data['pdate']=$info->pdate;
                 $data['testcenter']=$info->testcenter;
                 $data['phone']=$info->phone;
+                $data['labid']=$info->labid;
+                $data['swabcollecteddate']=$info->swabcollecteddate;
             }
             return response()->json($data);
         }
