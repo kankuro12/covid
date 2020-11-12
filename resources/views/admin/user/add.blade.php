@@ -58,6 +58,7 @@
                 </select>
             </div>
         </div>
+        
         <div class="col-md-6">
             <div class="form-group">
                 <label for="pdate">Positive Date</label>
@@ -86,6 +87,18 @@
             <div class="form-group">
                 <label for="description">Medical History</label>
                 <textarea  class="form-control"  placeholder="Medical history" name="description"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="labid">Lab ID</label>
+                <input type="text" class="form-control" required placeholder="Lab Id" name="labid">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="swabcollecteddate">Swab Collected Date</label>
+                <input type="date" class="form-control" required placeholder="Swab Collected Date" name="swabcollecteddate">
             </div>
         </div>
         <div class="col-md-4">
