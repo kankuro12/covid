@@ -84,6 +84,10 @@
                 
                 </ul>
             </li>
+            <li><a href="{{route('admin.message')}}"><i class="zmdi zmdi-info"></i><span>Welcome Message</span></a></li>
+
+            <li><a href="{{route('admin.about')}}"><i class="zmdi zmdi-email"></i><span>About</span></a></li>
+
             <li><a href="{{route('logout')}}"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
 
         </ul>

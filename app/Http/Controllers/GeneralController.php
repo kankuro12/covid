@@ -12,6 +12,8 @@ use App\Models\UserInfo;
 use App\Models\DonationRequest;
 use App\Models\News;
 use App\Models\RequestResponse;
+use App\Models\WelcomeMessage;
+use App\Models\About;
 class GeneralController extends Controller
 {
     public function GetDonar(Request $request){
@@ -123,5 +125,14 @@ class GeneralController extends Controller
         }
         $dd=$donations->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('donation_requests.created_at','desc')->get();
         return response()->json($dd);
+    }
+    public function aboutus(){
+        $about=About::first();
+        $desc=$about!=null?$about->description:"";
+        return response()->json(['aboutus'=>$desc]);
+    }
+    public function message(){
+        $message=WelcomeMessage::first();
+        return response()->json($message);
     }
 }

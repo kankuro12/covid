@@ -44,6 +44,10 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::get('requests/show/{req}', 'Admin\RequestController@show')->name('admin.request-show');
     Route::get('requests/complete/{req}/{user}', 'Admin\RequestController@complete')->name('admin.request-complete');
    
+    //aboutus
+    Route::match(['get','post'],'about', 'Admin\GeneralController@about')->name('admin.about');
+    Route::match(['get','post'],'message', 'Admin\GeneralController@message')->name('admin.message');
+
 });
 
 Route::get('/', function () {
