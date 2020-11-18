@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\UserInfo;
 use App\Notifications\PasswordReset;
 class AuthController extends Controller
 {
@@ -63,16 +64,32 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-         
+            'phone' => 'required',
         ]);
-        $credentials = request(['email', 'password']);
-        if(!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
-        $user = $request->user();
+        // $credentials = request(['email', 'password']);
+        // if(!Auth::attempt($credentials))
+        //     return response()->json([
+        //         'message' => 'Unauthorized'
+        //     ], 401);
+        $new=false;
+        $userinfo=UserInfo::where('phone',$request->phone)->first();
+        if($userinfo!=null){
+            $user=$userinfo->user;
+        }else{
+            $user = new User([
+                'name' => "",
+                'email' => $request->phone."@example.com",
+                'password' => bcrypt("admin@123")
+            ]);
+            $user->save();
+            $userinfo=new UserInfo();
+            $userinfo->user_id=$user->id;
+            $userinfo->description="";
+            $userinfo->phone=$request->phone;
+            $userinfo->save();
+            $new=true;
+        }
+       
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->expires_at = Carbon::now()->addYear(1);
@@ -84,7 +101,7 @@ class AuthController extends Controller
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
-            'newuser'=>$user->info==null
+            'newuser'=>$new
         ]);
     }
   
