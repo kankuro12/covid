@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Memo;
 use App\Models\UserInfo;
 use App\Models\DonationRequest;
+use App\Models\Donation;
 use App\Models\RequestResponse;
 use App\Models\ContactList;
 
@@ -196,5 +197,21 @@ class UserController extends Controller
                 array_push($datas,$data);
         }
         return response()->json($datas);
+    }
+
+    public function donated(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'phone'=>'required'
+        ]);
+        $user=Auth::user();
+        $d=new Donation();
+        $d->dname=$user->name;
+        $d->dphone=$user->info->phone;
+        $d->rname=$request->name;
+        $d->rphone=$request->phone;
+        $d->user_id=$user->id;
+        $d->save();
+        return response()->json($d);
     }
 }

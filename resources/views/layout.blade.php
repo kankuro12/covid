@@ -85,6 +85,9 @@
                 
                 </ul>
             </li>
+            <li><a href="{{route('admin.donations')}}"><i class="zmdi zmdi-info"></i><span>Donations</span></a></li>
+
+             
             <li><a href="{{route('admin.message')}}"><i class="zmdi zmdi-info"></i><span>Welcome Message</span></a></li>
 
             <li><a href="{{route('admin.about')}}"><i class="zmdi zmdi-email"></i><span>About</span></a></li>

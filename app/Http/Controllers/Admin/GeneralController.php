@@ -14,6 +14,7 @@ use App\Models\DonationRequest;
 use App\Models\News;
 use App\Models\WelcomeMessage;
 use App\Models\About;
+use App\Models\Donation;
 class GeneralController extends Controller
 {
     public function about(Request $request){
@@ -69,5 +70,9 @@ class GeneralController extends Controller
             $i=$message!=null;
             return view('admin.general.message',compact('message','i'));
         }
+    }
+
+    public function  donations(){
+        return view('admin.general.donations',['donations'=>Donation::all()]);
     }
 }

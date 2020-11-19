@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Route;
 
         Route::post('/addcontact','UserController@addcontact');
         Route::get('/contacts/{req_id}','UserController@contacts');
+        Route::get('/donated','UserController@donated');
 
     });
 

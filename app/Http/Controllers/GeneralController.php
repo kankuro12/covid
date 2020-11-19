@@ -14,6 +14,7 @@ use App\Models\News;
 use App\Models\RequestResponse;
 use App\Models\WelcomeMessage;
 use App\Models\About;
+use App\Models\Donation;
 class GeneralController extends Controller
 {
     public function GetDonar(Request $request){
@@ -119,14 +120,15 @@ class GeneralController extends Controller
     }
 
     public function donations(Request $request){
-        $donations =RequestResponse::join('users','users.id','=','request_responses.user_id')
-        ->join('donation_requests','donation_requests.id','=','request_responses.donation_request_id')
-        ->join('user_infos','users.id','=','user_infos.user_id')
-        ->where('donation_requests.accecpted',0);
-        if($request->has('bloodgroup')){
-            $donations=  $donations ->where('donation_requests.bloodgroup',0);
-        }
-        $dd=$donations->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('donation_requests.created_at','desc')->get();
+        // $donations =RequestResponse::join('users','users.id','=','request_responses.user_id')
+        // ->join('donation_requests','donation_requests.id','=','request_responses.donation_request_id')
+        // ->join('user_infos','users.id','=','user_infos.user_id')
+        // ->where('donation_requests.accecpted',0);
+        // if($request->has('bloodgroup')){
+        //     $donations=  $donations ->where('donation_requests.bloodgroup',0);
+        // }
+        // $dd=$donations->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('donation_requests.created_at','desc')->get();
+        $dd=Donation::orderBy('created_at','desc')->get();
         return response()->json($dd);
     }
     public function aboutus(){
