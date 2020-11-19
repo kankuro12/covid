@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Requests')
+@section('title','Expired Requests')
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
 @endsection
@@ -46,7 +46,7 @@
             </thead>
             <tbody>
                 @foreach ($list as $req)
-                    <tr id="row-{{$req->id}}">
+                    <tr>
                         <td>
                             {{$req->id}}
                         </td>
@@ -78,9 +78,6 @@
                             {{$req->accecpted==1?"Completed":"Incomplete"}}
                         </td>
                         <td>
-                            <div class="" >
-                                <button id="verify-{{$req->id}}" class="btn btn-success verify {{$req->verified==0?'unverified':'verified'}}" data-uid="{{$req->id}}" data-status="{{$req->verified}}"></button>
-                        </div>
                             <a href="{{route('admin.request-edit',['req'=>$req->id])}}">Edit</a>
                             <a href="{{route('admin.request-del',['req'=>$req->id])}}">Del</a>
                             <a href="{{route('admin.request-show',['req'=>$req->id])}}">Details</a>
@@ -107,7 +104,7 @@
             vdata=$(this).data();
             console.log(vdata);
             $.ajax({
-                url:"{{route('admin.req-verify')}}",
+                url:"{{route('admin.user-verify')}}",
                 data:vdata,
                 type: "post",
                 dataType  : 'json',

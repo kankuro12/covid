@@ -97,9 +97,12 @@ class GeneralController extends Controller
         }
         return response()->json($news->get());
     }
+    public function  singlenews($id){
+        return response()->json(News::find($id));
+    }
 
     public function bloodRequest(Request $request){
-        $req=DonationRequest::where('accecpted',0);
+        $req=DonationRequest::where('accecpted',0)->where('verified',1);
         if($request->has('bloodgroup')){
             $req=$req->where('bloodgroup',$request->bloodgroup);
         }

@@ -39,6 +39,7 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::get('bloodreq','GeneralController@bloodRequest');
+    Route::get('news/{id}','GeneralController@singlenews');
 
     Route::post('donars','GeneralController@GetDonar');
     Route::post('covidwinner','GeneralController@GetWinner');

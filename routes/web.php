@@ -38,11 +38,14 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     
     //Request Section
     Route::get('requests', 'Admin\RequestController@index')->name('admin.requests');
+    Route::get('exrequests', 'Admin\RequestController@expired')->name('admin.exrequests');
     Route::match(['get','post'],'requests/add', 'Admin\RequestController@add')->name('admin.request-add');
     Route::get('requests/edit/{req}', 'Admin\RequestController@edit')->name('admin.request-edit');
     Route::get('requests/del/{req}', 'Admin\RequestController@del')->name('admin.request-del');
     Route::get('requests/show/{req}', 'Admin\RequestController@show')->name('admin.request-show');
     Route::get('requests/complete/{req}/{user}', 'Admin\RequestController@complete')->name('admin.request-complete');
+    Route::post('requests/verify', 'Admin\RequestController@verify')->name('admin.req-verify');
+
    
     //aboutus
     Route::match(['get','post'],'about', 'Admin\GeneralController@about')->name('admin.about');

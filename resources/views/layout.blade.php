@@ -79,7 +79,8 @@
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-bookmark"></i><span>Requests</span></a>
                 <ul class="ml-menu">
                     {{-- <li><a href="{{route('admin.news-add')}}">Add New</a></li> --}}
-                    <li><a href="{{route('admin.requests')}}">List</a></li>
+                    <li><a href="{{route('admin.requests')}}">Current List</a></li>
+                    <li><a href="{{route('admin.exrequests')}}">Expired List</a></li>
                     <li><a href="{{route('admin.request-add')}}">Add Request</a></li>
                 
                 </ul>

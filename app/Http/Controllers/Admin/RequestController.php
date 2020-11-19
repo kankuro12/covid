@@ -14,8 +14,30 @@ use App\Models\DonationRequest;
 use App\Models\News;
 class RequestController extends Controller
 {
-    public function index(){
-        return view('admin.request.index',['list'=>DonationRequest::all()]);
+    public function index(Request $request){
+        
+        $day=Carbon::now()->addDays(-5);
+        // dd($day);
+        $list=DonationRequest::where('created_at','>',$day)->get();
+        return view('admin.request.index',['list'=>$list]);
+    }
+
+    public function verify(Request $request){
+        $request->validate([
+            'status'=>'required',
+            'uid'=>'required'
+        ]);
+        $req=DonationRequest::find($request->uid);
+        $req->verified=$request->status==0?1:0;
+        $req->save();
+        return response()->json(['status'=>$req->verified,'id'=>$req->id]);
+    }
+
+    public function expired(Request $request){
+        
+        $day=Carbon::now()->addDays(-4);
+        $list=DonationRequest::where('created_at','<',$day)->get();
+        return view('admin.request.exindex',['list'=>$list]);
     }
 
     public function add(Request $request){
