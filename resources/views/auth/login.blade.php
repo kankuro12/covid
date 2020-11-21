@@ -23,7 +23,7 @@
                 <form class="card auth_form" action="{{route('login')}}" method="post">
                  
                     <div class="header">
-                        <img class="logo" src="{{asset('assets/images/logo.svg')}}" alt="">
+                        <img class="logo" src="{{asset('assets/images/nepal_logo.png')}}" alt="">
                         <h5>Log in</h5>
                     </div>
 
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="col-lg-8 col-sm-12">
-                <div class="card">
+                <div class="card">   
                     <img src="{{asset('assets/images/signin.svg')}}" alt="Sign In"/>
                 </div>
             </div>
