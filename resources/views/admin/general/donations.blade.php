@@ -3,7 +3,12 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
 @endsection
-
+@section('toolbar')
+<a class="btn btn-primary" href="{{route('admin.donation-add')}}">
+    Add Donation
+</a>
+<hr>
+@endsection
 @section('content')
     <div class="table-responsive">
 
