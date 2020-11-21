@@ -75,4 +75,24 @@ class GeneralController extends Controller
     public function  donations(){
         return view('admin.general.donations',['donations'=>Donation::all()]);
     }
+
+
+    public function donationsStore(Request $request){
+        if($request->isMethod('post')){
+            
+            $user=Auth::user();
+            $d=new Donation();
+            $d->dname=$request->dname;
+            $d->dphone=$request->dphone;
+            $d->rname=$request->rname;
+            $d->rphone=$request->rphone;
+            $d->user_id=$user->id;
+            $d->save();
+            return redirect()->route('admin.donations')->with('message','Donation added Sucessfully');
+
+        }else{
+          return view('admin.general.donationadd');
+        }
+
+    }
 }

@@ -50,8 +50,10 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     //aboutus
     Route::match(['get','post'],'about', 'Admin\GeneralController@about')->name('admin.about');
     Route::match(['get','post'],'message', 'Admin\GeneralController@message')->name('admin.message');
-    //donations
+    //donations 
     Route::get('/donations','Admin\GeneralController@donations')->name('admin.donations');
+    Route::match(['get','post'],'donation/add', 'Admin\GeneralController@donationsStore')->name('admin.donation-add');
+
 });
 
 Route::get('/', function () {
