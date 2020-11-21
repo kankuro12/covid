@@ -66,7 +66,7 @@ class RequestController extends Controller
             $req->amount=$request->amount;
             $req->hospital=$request->hospital;
             $req->needed=$request->needed;
-            $req->description=$request->description;
+            $req->description=$request->description??"";
             $req->bloodgroup=$request->bloodgroup;
             $req->save();        
     
