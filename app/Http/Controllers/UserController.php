@@ -201,7 +201,6 @@ class UserController extends Controller
 
     public function donated(Request $request){
         $request->validate([
-            'name'=>'required',
             'phone'=>'required'
         ]);
         $user=Auth::user();
