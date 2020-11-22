@@ -80,12 +80,12 @@ class UserController extends Controller
                 $data['pdate']='';
                 $data['labid']='';
                 $data['swabcollecteddate']='';
-                $data['pdate']='';
                 $data['hasdonated']=0;
                 $data['ispublic']=$user->ispublic;
                 $data['name']=$user->name;
                 $data['email']=$user->email;
             }else{
+                // dfsdh
                 $data['address']=$info->address;
                 $data['bloodgroup']=$info->bloodgroup;
                 $data['nvdate']=$info->nvdate;
@@ -105,6 +105,8 @@ class UserController extends Controller
             return response()->json($data);
         }
     }
+
+    // kldsfjdslkfjdslkfjkslfjsdlkfjlksdjfklsfjkldfjdsklfjl
 
     public function bloodRequest(){
         return response()->json(Auth::user()->bloodRequests);

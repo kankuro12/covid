@@ -58,7 +58,7 @@
                                     </td>
 
                                     <td>
-                                        {{$user->phone}}
+                                        {{$user->info->phone}}
                                     </td>
                                     @php
 
@@ -156,7 +156,7 @@
                                     </td>
 
                                     <td>
-                                        {{$user->phone}}
+                                        {{$user->info->phone}}
                                     </td>
                                     @php
 
