@@ -86,7 +86,15 @@ class GeneralController extends Controller
             $d->dphone=$request->dphone;
             $d->rname=$request->rname;
             $d->rphone=$request->rphone;
-            $d->user_id=$user->id;
+            $uu=UserInfo::where('phone',$request->dphone)->first();
+            if($uu!=null){
+                $d->user_id=$uu->user_id;
+                $uu->hasdonated=1;
+                $uu->save();
+            }else{
+
+                $d->user_id=$user->id;
+            }
             $d->save();
             return redirect()->route('admin.donations')->with('message','Donation added Sucessfully');
 
