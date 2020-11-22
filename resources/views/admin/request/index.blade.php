@@ -15,7 +15,7 @@
         <div class="body">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs p-0 mb-3">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Varified</a></li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Verified</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Unverified</a></li>
             </ul>
             <!-- Tab panes -->
@@ -107,7 +107,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="table-responsive">
-                        <table id="newstable" class="table table-bordered table-striped table-hover dataTable">
+                        <table id="newstable1" class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                                 <tr>
                                     <th>
@@ -202,6 +202,7 @@
 <script>
     $(function() {
         $('#newstable').DataTable();
+        $('#newstable1').DataTable();
         $('.verify').click(function() {
             console.log(this);
             vdata = $(this).data();
