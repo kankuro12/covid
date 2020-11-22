@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
           'middleware' => 'auth:api'
         ], function() {
 
-
             Route::get('changepassword','AuthController@changePassword');
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AuthController@user');
@@ -25,6 +24,8 @@ use Illuminate\Support\Facades\Route;
         
         });
     });
+
+    
     Route::group([ 'middleware' => 'auth:api','prefix'=>'user'],function (){
 
         Route::match(['get', 'post'], 'memo', 'UserController@memo'); 
@@ -48,6 +49,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('news','GeneralController@news');
     Route::get('aboutus','GeneralController@aboutus');
     Route::get('message','GeneralController@message');
+
+
+
     
 // });
 
