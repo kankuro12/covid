@@ -48,12 +48,12 @@ class UserController extends Controller
             $info->address=$request->address;
             $info->bloodgroup=$request->bloodgroup;
             $info->nvdate=$request->nvdate;
-            $info->nvdate=$request->nvdate;
+            $info->pdate=$request->pdate;
             $info->testcenter=$request->testcenter;
             $info->waspositive=$request->waspositive;
             $info->description=$request->description??'';
             $info->age=$request->age;
-            $info->phone=$request->phone;
+            // $info->phone=$request->phone;
             $info->labid=$request->labid;
             $info->swabcollecteddate=$request->swabcollecteddate;
             $info->hasdonated=$request->hasdonated??0;
@@ -205,12 +205,18 @@ class UserController extends Controller
         ]);
         $user=Auth::user();
         $d=new Donation();
+        
         $d->dname=$user->name;
         $d->dphone=$user->info->phone;
         $d->rname=$request->name;
         $d->rphone=$request->phone;
         $d->user_id=$user->id;
         $d->save();
+
+        $userinfo=UserInfo::where('phone',$request->phone)->first();
+        if($userinfo!=null){
+            $requests=DonationRequest::where('user_id',$userinfo->user_id)->update(['accecpted'=>1]);
+        }
         return response()->json($d);
     }
 }
