@@ -224,6 +224,21 @@ class UserController extends Controller
         }
         return response()->json($d);
     }
+
+    public function myRequest(){
+        $user = Auth::user();
+        $req = DonationRequest::where('user_id',$user->id)->get();
+        return response()->json($req);
+    }
+
+    public function myDonation(){
+        $user = Auth::user();
+        $mydonation = Donation::where('user_id',$user->id)->get();
+        return response()->json($mydonation);
+    }
+
 }
+
+
 
 // change here
