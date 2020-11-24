@@ -131,6 +131,13 @@ class GeneralController extends Controller
         $dd=Donation::orderBy('created_at','desc')->get();
         return response()->json($dd);
     }
+
+    public function takerData(){
+        $taker = DonationRequest::where('accecpted',1)->get();
+        return response()->json($taker);
+    }
+
+
     public function aboutus(){
         $about=About::first();
         $desc=$about!=null?$about->description:"";

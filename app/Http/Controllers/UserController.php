@@ -218,10 +218,12 @@ class UserController extends Controller
         $info=$user->info;
         $info->hasdonated=1;
         $info->save();
-        $userinfo=UserInfo::where('phone',$request->phone)->first();
-        if($userinfo!=null){
-            $requests=DonationRequest::where('user_id',$userinfo->user_id)->update(['accecpted'=>1]);
+        $check = DonationRequest::where('phone',$request->phone)->first();
+        if($check != null){
+            DonationRequest::where('phone',$request->phone)->update(['accecpted'=>1]);
         }
         return response()->json($d);
     }
 }
+
+// change here

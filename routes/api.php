@@ -46,6 +46,10 @@ use Illuminate\Support\Facades\Route;
     Route::post('donars','GeneralController@GetDonar');
     Route::post('covidwinner','GeneralController@GetWinner');
     Route::get('donations','GeneralController@donations');
+
+    Route::get('taker','GeneralController@takerData');
+
+
     Route::post('news','GeneralController@news');
     Route::get('aboutus','GeneralController@aboutus');
     Route::get('message','GeneralController@message');
