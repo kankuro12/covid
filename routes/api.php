@@ -38,6 +38,10 @@ use Illuminate\Support\Facades\Route;
         Route::get('/contacts/{req_id}','UserController@contacts');
         Route::post('/donated','UserController@donated');
 
+        Route::get('myrequest','UserController@myRequest');
+        Route::get('mydonation','UserController@myDonation');
+
+
     });
 
     Route::get('bloodreq','GeneralController@bloodRequest');
@@ -53,6 +57,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('news','GeneralController@news');
     Route::get('aboutus','GeneralController@aboutus');
     Route::get('message','GeneralController@message');
+
 
 
 

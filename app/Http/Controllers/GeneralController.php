@@ -126,14 +126,14 @@ class GeneralController extends Controller
         // ->where('donation_requests.accecpted',0);
         // if($request->has('bloodgroup')){
         //     $donations=  $donations ->where('donation_requests.bloodgroup',0);
-        // }
+        // } ('order_items','shipping_details.id','=','order_items.shipping_detail_id')-
         // $dd=$donations->select( DB::raw('donation_requests.name as rname','donation_requests.phone as rphone','user_infos.phone as dphone','users.name as dname','request_responses.created_at'))->orderBy('donation_requests.created_at','desc')->get();
-        $dd=Donation::orderBy('created_at','desc')->get();
+        $dd=User::join('user_infos','users.id','=','user_infos.user_id')->where('hasdonated',1)->get();
         return response()->json($dd);
     }
 
     public function takerData(){
-        $taker = DonationRequest::where('accecpted',1)->get();
+        $taker = DonationRequest::where('accecpted',1)->orderBy('created_at','desc')->get();
         return response()->json($taker);
     }
 
@@ -147,4 +147,6 @@ class GeneralController extends Controller
         $message=WelcomeMessage::first();
         return response()->json($message);
     }
+
+    
 }

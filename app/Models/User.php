@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function bloodRequests(){
-        $this->hasMany(DonationRequest::class);
+        return $this->hasMany(DonationRequest::class);
     }
 
     public function info(){
