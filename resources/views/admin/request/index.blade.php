@@ -216,8 +216,10 @@
                     console.log(data.status);
                     $('#verify-' + data.id).data('status', data.status);
                     if (data.status == 1) {
+                        window.location.reload();
                         $('#verify-' + data.id).addClass('verified').removeClass('unverified');
                     } else {
+                        window.location.reload();
                         $('#verify-' + data.id).addClass('unverified').removeClass('verified');
 
                     }

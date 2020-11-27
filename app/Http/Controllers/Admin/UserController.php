@@ -55,6 +55,25 @@ class UserController extends Controller
         return response()->json($donar->get());
     }
 
+    public function nearToExpireList(){
+        // dd($date1);
+        $donar=DB::table('user_infos')->join('users','user_infos.user_id','=','users.id')->
+        where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('users.verified',1)
+        ->get();
+        // dd($donar);
+        $data = [];
+        foreach ($donar as $key => $value) {
+            $now = Carbon::now();
+            $date2 = date('Y-m-d', strtotime("+20 day", strtotime($value->nvdate)));
+            $date1 = date('Y-m-d', strtotime("+30 day", strtotime($value->nvdate)));
+
+            if($date2 < $now && $date1 > $now){
+                array_push($data,$value);
+            }
+        }
+        dd($data);
+    }
+
     public function verify(Request $request){
         $request->validate([
             'status'=>'required',
