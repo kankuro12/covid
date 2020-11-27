@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::match(['get', 'post'], 'login', 'AuthController@frontLogin')->name('login');
 Route::match(['get', 'post'], 'logout', 'AuthController@frontLogout')->name('logout');
 
@@ -29,7 +31,8 @@ Route::group([ 'middleware' => 'role:admin','prefix'=>'admin'],function (){
     Route::post('users/verify', 'Admin\UserController@verify')->name('admin.user-verify');
     Route::get('donors','Admin\UserController@donors')->name('admin.donors');
     Route::get('show/{user}','Admin\UserController@show')->name('admin.user-show');
-    
+    Route::get('near-to-expire-donor-list','Admin\UserController@nearToExpireList')->name('admin.near.expire');
+
     Route::match(['get', 'post'],'users/edit/{user}', 'Admin\UserController@edit')->name('admin.user-edit');
     Route::match(['get', 'post'],'users/add', 'Admin\UserController@add')->name('admin.user-add');
   
