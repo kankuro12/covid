@@ -212,18 +212,23 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if ($request->donationtype == 1) {
-            $user_info = UserInfo::where('user_id', $user->id)->first();
-            $user_info->donationtype = 1;
-            $user_info->hasdonated = 1;
-            $user_info->save();
-            $d = new Donation();
-            $d->dname = $user->name;
-            $d->dphone = $user->info->phone;
-            $d->rname = "Donated To Blood Bank";
-            $d->rphone = "-----";
-            $d->user_id = $user->id;
-            $d->save();
-            return response()->json($d);
+            $checkStatus = UserInfo::where('user_id',$user->id)->where('donationtype',0)->first();
+            if($checkStatus != null){
+                $user_info = UserInfo::where('user_id', $user->id)->first();
+                $user_info->donationtype = 1;
+                $user_info->hasdonated = 1;
+                $user_info->save();
+                $d = new Donation();
+                $d->dname = $user->name;
+                $d->dphone = $user->info->phone;
+                $d->rname = "Donated To Blood Bank";
+                $d->rphone = "-----";
+                $d->user_id = $user->id;
+                $d->save();
+                return response()->json($d);
+            }else{
+                return response()->json('Sorry your request has been failed');
+            }
         } else {
             $check = DonationRequest::where('phone', $request->phone)->where('accecpted', 0)->first();
             if ($check != null) {
