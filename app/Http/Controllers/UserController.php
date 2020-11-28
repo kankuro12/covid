@@ -214,6 +214,7 @@ class UserController extends Controller
         if ($request->donationtype == 1) {
             $user_info = UserInfo::where('user_id', $user->id)->first();
             $user_info->donationtype = 1;
+            $user_info->hasdonated = 1;
             $user_info->save();
             $d = new Donation();
             $d->dname = $user->name;

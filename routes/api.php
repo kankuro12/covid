@@ -42,8 +42,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('mydonation','UserController@myDonation');
         Route::get('donation-status','UserController@donationStatus');
 
-
-
     });
 
     Route::get('bloodreq','GeneralController@bloodRequest');
