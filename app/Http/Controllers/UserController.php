@@ -260,6 +260,13 @@ class UserController extends Controller
         $mydonation = Donation::where('user_id', $user->id)->get();
         return response()->json($mydonation);
     }
+
+    public function donationStatus(){
+        $user = Auth::user();
+        $info = UserInfo::where('user_id',$user->id)->select('donationtype')->first();
+        return response()->json($info);
+    }
+
 }
 
 

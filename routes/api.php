@@ -40,6 +40,8 @@ use Illuminate\Support\Facades\Route;
 
         Route::get('myrequest','UserController@myRequest');
         Route::get('mydonation','UserController@myDonation');
+        Route::get('donation-status','UserController@donationStatus');
+
 
 
     });
