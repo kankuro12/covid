@@ -25,7 +25,7 @@
                 <div role="tabpanel" class="tab-pane in active" id="home">
                     <div class="table-responsive">
 
-                        <table id="newstable" class="table table-bordered table-striped table-hover dataTable">
+                        <table id="newstable" class="table table-bordered ">
                             <thead>
                                 <tr>
                                     <th>
@@ -123,7 +123,7 @@
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="table-responsive">
 
-                        <table id="newstable1" class="table table-bordered table-striped table-hover dataTable">
+                        <table id="newstable1" class="table table-bordered ">
                             <thead>
                                 <tr>
                                     <th>
@@ -222,7 +222,7 @@
                 <div role="tabpanel" class="tab-pane" id="noncovid">
                     <div class="table-responsive">
 
-                        <table id="newstable2" class="table table-bordered table-striped table-hover dataTable">
+                        <table id="newstable2" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>
@@ -328,10 +328,8 @@
 <script src="{{asset('assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
 <script>
+        
     $(function() {
-        $('#newstable').DataTable();
-        $('#newstable1').DataTable();
-        $('#newstable2').DataTable();
         $('.verify').click(function() {
             console.log(this);
             vdata = $(this).data();
@@ -362,9 +360,7 @@
             });
         });
 
-
-
-
     });
+
 </script>
 @endsection

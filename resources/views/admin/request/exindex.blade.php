@@ -97,8 +97,8 @@
 <script>
 
    
+    $('#newstable').DataTable();
     $(function () {
-        $('#newstable').DataTable();
         $('.verify').click(function(){
             console.log(this);
             vdata=$(this).data();
