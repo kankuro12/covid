@@ -25,7 +25,7 @@
                 <div role="tabpanel" class="tab-pane in active" id="home">
                     <div class="table-responsive">
 
-                        <table id="newstable" class="table table-bordered ">
+                        <table id="newstable" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>
