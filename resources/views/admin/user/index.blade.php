@@ -205,6 +205,9 @@
                                             <a href="{{route('admin.user-show',['user'=>$user->id])}}">Detail</a>|
                                             <a href="{{route('admin.user-edit',['user'=>$user->id])}}">Edit</a>
                                         </div>
+                                        <div>
+                                           <a class="btn btn-danger" href="{{route('admin.user-del',['user'=>$user->id])}}">Delete</a>
+                                        </div>
                                     </td>
                                     {{-- <td>
                                     <a href="{{route('admin.user-edit',['user'=>$user->id])}}">Edit</a> |
