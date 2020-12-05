@@ -206,7 +206,7 @@
                                             <a href="{{route('admin.user-edit',['user'=>$user->id])}}">Edit</a>
                                         </div>
                                         <div>
-                                           <a class="btn btn-danger" href="{{route('admin.user-del',['user'=>$user->id])}}">Delete</a>
+                                           <a class="btn btn-danger" href="{{route('admin.user-del',['user'=>$user->id])}}" onclick="return confirm('Are you sure?');">Delete</a>
                                         </div>
                                     </td>
                                     {{-- <td>
