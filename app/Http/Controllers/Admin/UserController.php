@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     //
     public function index(){
-        $list=User::latest()->where('role',0)->get();
+        $list=User::where('role',0)->orderBy('name','asc')->get();
         return  view('admin.user.index',compact('list'));
     }
 
@@ -185,6 +185,13 @@ class UserController extends Controller
         $req->save();  
 
         return redirect()->route('admin.user-show',['user'=>$req->user_id])->with('message','Request Updated Sucessfully');;
+    }
+
+    public function del($user){
+        $userd = User::find($user);
+        UserInfo::where('user_id',$userd->id)->delete();
+        $userd->delete();
+        return redirect()->back();
     }
 
     public function search($phone,$req_id){
