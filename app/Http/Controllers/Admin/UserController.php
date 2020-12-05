@@ -191,7 +191,7 @@ class UserController extends Controller
         $userd = User::find($user);
         UserInfo::where('user_id',$userd->id)->delete();
         $userd->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message','User deleted successfully.');
     }
 
     public function search($phone,$req_id){
