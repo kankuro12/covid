@@ -112,11 +112,11 @@ class UserController extends Controller
             $info->age=$request->age;
             $info->phone=$request->phone;
             $info->hasdonated=$request->hasdonated??0;
-            $info->labid=$request->labid;
+            $info->labid=strtoupper($request->labid);
             $info->swabcollecteddate=$request->swabcollecteddate;
             $info->save();
 
-            $user->name=$request->name;
+            $user->name=ucfirst($request->name);
             $user->email=$request->email;
             $user->ispublic=$request->ispublic??1;
             $user->verified=1;
