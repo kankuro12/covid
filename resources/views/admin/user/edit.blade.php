@@ -26,7 +26,7 @@
     $null=$info==null;
     
 @endphp 
-<form action="{{route('admin.user-add')}}" method="post">
+<form action="{{route('admin.user-edit',$user->id)}}" method="post">
     @csrf
     <div class="row">
         <div class="col-md-6">
