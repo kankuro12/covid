@@ -118,7 +118,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|max:10',
             'amount' => 'required',
             'hospital' => 'required',
             'needed' => 'required',

@@ -71,6 +71,12 @@
                                         <div>
                                             <strong>-ve Date : </strong> {{$user->nvdate??'Not +ve yet'}}
                                         </div>
+                                           @php
+                                            $now = \Carbon\Carbon::now();
+                                           @endphp 
+                                        <div>
+                                            <strong>Total days after -ve Date : </strong> {{($now->diffInDays($user->nvdate))}} Days
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach

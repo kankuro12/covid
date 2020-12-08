@@ -15,12 +15,12 @@
         <div class="body">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs p-0 mb-3">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Verified</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Unverified</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#home">Verified</a></li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile">Unverified</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane in active" id="home">
+                <div role="tabpanel" class="tab-pane" id="home">
                     <div class="table-responsive">
 
                         <table id="newstable" class="table table-bordered ">
@@ -93,8 +93,8 @@
                                         <div class="">
                                             <button id="verify-{{$req->id}}" class="btn btn-success verify {{$req->verified==0?'unverified':'verified'}}" data-uid="{{$req->id}}" data-status="{{$req->verified}}"></button>
                                         </div>
-                                        <a href="{{route('admin.request-edit',['req'=>$req->id])}}">Edit</a>
-                                        <a href="{{route('admin.request-del',['req'=>$req->id])}}">Del</a>
+                                        <a href="{{route('admin.request-edit',['req'=>$req->id])}}">Edit</a>|
+                                        <a href="{{route('admin.request-del',['req'=>$req->id])}}" onclick="return confirm('are you sure?');">Del</a>|
                                         <a href="{{route('admin.request-show',['req'=>$req->id])}}">Details</a>
                                     </td>
 
@@ -105,7 +105,7 @@
                         </table>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="profile">
+                <div role="tabpanel" class="tab-pane in active" id="profile">
                     <div class="table-responsive">
                         <table id="newstable1" class="table table-bordered ">
                             <thead>
@@ -177,8 +177,8 @@
                                         <div class="">
                                             <button id="verify-{{$req->id}}" class="btn btn-success verify {{$req->verified==0?'unverified':'verified'}}" data-uid="{{$req->id}}" data-status="{{$req->verified}}"></button>
                                         </div>
-                                        <a href="{{route('admin.request-edit',['req'=>$req->id])}}">Edit</a>
-                                        <a href="{{route('admin.request-del',['req'=>$req->id])}}">Del</a>
+                                        <a href="{{route('admin.request-edit',['req'=>$req->id])}}">Edit</a> |
+                                        <a href="{{route('admin.request-del',['req'=>$req->id])}}" onclick="return confirm('are you sure?');">Del</a>|
                                         <a href="{{route('admin.request-show',['req'=>$req->id])}}">Details</a>
                                     </td>
 

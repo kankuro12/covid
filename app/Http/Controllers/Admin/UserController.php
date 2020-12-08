@@ -64,12 +64,13 @@ class UserController extends Controller
         foreach ($donar as $key => $value) {
             $now = Carbon::now();
             $date2 = date('Y-m-d', strtotime("+20 day", strtotime($value->nvdate)));
-            $date1 = date('Y-m-d', strtotime("+30 day", strtotime($value->nvdate)));
+            $date1 = date('Y-m-d', strtotime("+40 day", strtotime($value->nvdate)));
 
             if($date2 < $now && $date1 > $now){
                 array_push($list,$value);
             }
         }
+        
         // dd($list);
         return  view('admin.user.neatexpire',compact('list'));
     }
@@ -132,9 +133,10 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'email' => 'required|string|email|unique:users',
+                'phone' => 'max:10'
             ]);
             $user = new User([
-                'name' => $request->name,
+                'name' => ucfirst($request->name),
                 'email' => $request->email,
                 'password' => bcrypt('user@123456')
             ]);
@@ -152,7 +154,7 @@ class UserController extends Controller
             $info->age=$request->age;
             $info->phone=$request->phone;
             $info->hasdonated=$request->hasdonated??0;
-            $info->labid=$request->labid;
+            $info->labid= strtoupper($request->labid);
             $info->swabcollecteddate=$request->swabcollecteddate;
             $user->ispublic=$request->ispublic??1;
             $user->verified=1;
