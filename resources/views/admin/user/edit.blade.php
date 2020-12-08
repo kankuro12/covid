@@ -78,7 +78,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="nvdate">Negative Date</label>
-                <input type="date" class="form-control"  placeholder="Negative Date" name="nvdate" value="{{$null?'':$info->ndate}}">
+                <input type="date" class="form-control"  placeholder="Negative Date" name="nvdate" value="{{$null?'':$info->nvdate}}">
             </div>
         </div>
         <div class="col-md-6">
