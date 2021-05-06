@@ -20,7 +20,7 @@
                 'O-',
                 'AB-'
             ];
-@endphp 
+@endphp
 <form action="{{route('admin.user-add')}}" method="post">
     @csrf
     <div class="row">
@@ -33,7 +33,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" required placeholder="Email" name="email">
+                <input type="email" class="form-control" placeholder="Email" name="email">
             </div>
         </div>
         <div class="col-md-6">
@@ -58,7 +58,7 @@
                 </select>
             </div>
         </div>
-        
+
         <div class="col-md-6">
             <div class="form-group">
                 <label for="pdate">Positive Date</label>

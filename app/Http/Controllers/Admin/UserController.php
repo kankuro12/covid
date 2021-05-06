@@ -70,7 +70,7 @@ class UserController extends Controller
                 array_push($list,$value);
             }
         }
-        
+
         // dd($list);
         return  view('admin.user.neatexpire',compact('list'));
     }
@@ -96,7 +96,7 @@ class UserController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|string|email',
             ]);
-           
+
             $info=$user->info;
             if($info==null){
                 $info=new UserInfo();
@@ -132,12 +132,11 @@ class UserController extends Controller
         if($request->getMethod()=="POST"){
             $request->validate([
                 'name' => 'required|string',
-                'email' => 'required|string|email|unique:users',
                 'phone' => 'max:10'
             ]);
             $user = new User([
                 'name' => ucfirst($request->name),
-                'email' => $request->email,
+                'email' => $request->email??" ",
                 'password' => bcrypt('user@123456')
             ]);
             $user->save();
@@ -161,7 +160,6 @@ class UserController extends Controller
             $info->save();
             $user->save();
             return redirect()->route('admin.user-add')->with('message','Donor Added Sucessfully');
-
         }else{
             return view('admin.user.add');
         }
@@ -176,7 +174,7 @@ class UserController extends Controller
             'needed'=>'required',
             'bloodgroup'=>'required'
         ]);
-       
+
         $req->name=$request->name;
         $req->phone=$request->phone;
         $req->amount=$request->amount;
@@ -184,7 +182,7 @@ class UserController extends Controller
         $req->needed=$request->needed;
         $req->description=$request->description;
         $req->bloodgroup=$request->bloodgroup;
-        $req->save();  
+        $req->save();
 
         return redirect()->route('admin.user-show',['user'=>$req->user_id])->with('message','Request Updated Sucessfully');;
     }
@@ -199,6 +197,6 @@ class UserController extends Controller
     public function search($phone,$req_id){
         $users=UserInfo::where('phone','like','%'.$phone.'%')->get();
         return view('admin.user.search_phone',compact('users','req_id'));
-        
+
     }
 }
