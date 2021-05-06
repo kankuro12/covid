@@ -31,7 +31,7 @@ class GeneralController extends Controller
 
 
         }else{
-            
+
             $about=About::first();
             $i=$about!=null;
             return view('admin.general.about',compact('about','i'));
@@ -56,7 +56,7 @@ class GeneralController extends Controller
                     $filename =time().'.'.$extension;
                     $file->move(public_path().'/images', $filename);
                     $message->image='images/'.$filename;
-                    
+
                 }
             }
             $message->save();
@@ -65,7 +65,7 @@ class GeneralController extends Controller
 
 
         }else{
-            
+
             $message=WelcomeMessage::first();
             $i=$message!=null;
             return view('admin.general.message',compact('message','i'));
@@ -73,13 +73,13 @@ class GeneralController extends Controller
     }
 
     public function  donations(){
-        return view('admin.general.donations',['donations'=>Donation::all()]);
+        return view('admin.general.donations',['donations'=>User::join('user_infos','users.id','=','user_infos.user_id')->where('hasdonated',1)->get()]);
     }
 
 
     public function donationsStore(Request $request){
         if($request->isMethod('post')){
-            
+
             $user=Auth::user();
             $d=new Donation();
             $d->dname=$request->dname;

@@ -54,7 +54,7 @@ class GeneralController extends Controller
     }
 
     public function getWinner(Request $request){
-     
+
         $donar=DB::table('user_infos')::join('users','user_infos.user_id','=','users.id')->
         where('user_infos.waspositive',1)->whereNotNull('user_infos.nvdate');
         if($request->has('bloodgroup')){
@@ -119,7 +119,7 @@ class GeneralController extends Controller
         return response()->json($req->get());
     }
 
-    public function takerData(Request $request){
+    public function donations(Request $request){
         // $donations =RequestResponse::join('users','users.id','=','request_responses.user_id')
         // ->join('donation_requests','donation_requests.id','=','request_responses.donation_request_id')
         // ->join('user_infos','users.id','=','user_infos.user_id')
@@ -132,7 +132,7 @@ class GeneralController extends Controller
         return response()->json($dd);
     }
 
-    public function donations(){
+    public function takerData(){
         $taker = DonationRequest::where('accecpted',1)->orderBy('created_at','desc')->get();
         return response()->json($taker);
     }
@@ -148,5 +148,5 @@ class GeneralController extends Controller
         return response()->json($message);
     }
 
-    
+
 }
