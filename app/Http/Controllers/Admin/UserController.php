@@ -63,8 +63,8 @@ class UserController extends Controller
         $list = [];
         foreach ($donar as $key => $value) {
             $now = Carbon::now();
-            $date2 = date('Y-m-d', strtotime("+20 day", strtotime($value->nvdate)));
-            $date1 = date('Y-m-d', strtotime("+40 day", strtotime($value->nvdate)));
+            $date2 = date('Y-m-d', strtotime("+100 day", strtotime($value->nvdate)));
+            $date1 = date('Y-m-d', strtotime("+120 day", strtotime($value->nvdate)));
 
             if($date2 < $now && $date1 > $now){
                 array_push($list,$value);
