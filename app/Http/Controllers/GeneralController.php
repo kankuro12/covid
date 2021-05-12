@@ -18,7 +18,7 @@ use App\Models\Donation;
 class GeneralController extends Controller
 {
     public function GetDonar(Request $request){
-        $date=Carbon::now()->addDays(-30);
+        $date=Carbon::now()->addDays(-120);
         $donar=DB::table('user_infos')->join('users','user_infos.user_id','=','users.id')->
         where('user_infos.waspositive',1)->where('user_infos.hasdonated',0)->whereNotNull('user_infos.nvdate')->where('user_infos.nvdate','>',$date)->where('users.verified',1);
         if($request->has('bloodgroup')){
